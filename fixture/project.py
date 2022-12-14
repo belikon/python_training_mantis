@@ -17,7 +17,7 @@ class ProjectHelper:
         if project.description is not None:
             wd.find_element_by_name("description").click()
             wd.find_element_by_name("description").clear()
-            wd.find_element("name", "description").send_keys(project.description)
+            wd.find_element_by_name("description").send_keys(project.description)
         wd.find_element_by_xpath("//input[@value='Add Project']").click()
         self.project_cache = None
 
@@ -44,6 +44,7 @@ class ProjectHelper:
                 self.project_cache.append(Project(name=name, description=description, status=status, view_status=view_status))
         return list(self.project_cache)
 
+
     def select_project_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_xpath("//table[@class='width100']")[1].find_elements_by_tag_name("a")[index].click()
@@ -54,4 +55,5 @@ class ProjectHelper:
         wd.find_element_by_link_text(project.name).click()
         wd.find_element_by_xpath("//input[@value='Delete Project']").click()
         wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        self.project_cache = None
 
